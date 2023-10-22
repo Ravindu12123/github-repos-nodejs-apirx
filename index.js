@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 8081;
 const fs= require('fs');
 
 const download = (url, dest, cb) => {
-axios.get('http://www.sclance.com/pngs/png-file-download/png_file_download_1057991.png', {responseType: "stream"} )  
+axios.get(url, {responseType: "stream"} )  
 .then(response => {  
 // Saving file to working directory  
     response.data.pipe(fs.createWriteStream(dest));  
