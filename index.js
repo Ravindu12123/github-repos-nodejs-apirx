@@ -4,9 +4,9 @@ const app = express();
 const PORT = process.env.PORT || 8081;
 
 app.get('/', async (req, res) => {
-  const username = req.query.username || 'myogeshchavan97';
+  const u = req.query.u;
   try {
-    repos='Its working!.';
+    repos=`Its working! ${u}`;
 
     res.send(repos);
   } catch (error) {
