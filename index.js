@@ -43,7 +43,7 @@ app.get('/file', async (req, res) => {
   }
 });
 
-app.get('/download',async (req,res){
+app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
   const na=url.split('/');
