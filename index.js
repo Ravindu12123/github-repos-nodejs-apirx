@@ -6,9 +6,9 @@ const PORT = process.env.PORT || 8081;
 app.get('/', async (req, res) => {
   const u = req.query.u;
   try {
-    repos=`Its working! ${u}`;
+    res.sendFile(__dirname + "/i.mp4");
 
-    res.send(repos);
+    //res.send(repos);
   } catch (error) {
     res.status(400).send('Error while getting list of repositories');
   }
