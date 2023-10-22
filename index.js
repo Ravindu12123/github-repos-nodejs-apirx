@@ -2,36 +2,18 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const PORT = process.env.PORT || 8081;
-const request = require('request');
 const fs= require('fs');
 
 const download = (url, dest, cb) => {
-    const file = fs.createWriteStream(dest);
-    const sendReq = request.get(url);
-    
-    // verify response code
-    sendReq.on('response', (response) => {
-        if (response.statusCode !== 200) {
-            return cb(1);
-        }else{
-          return cb(0);
-        }
-
-        sendReq.pipe(file);
-    });
-
-    // close() is async, call cb after close completes
-    file.on('finish', () => file.close(cb));
-
-    // check for request errors
-    sendReq.on('error', (err) => {
-        fs.unlink(dest, () => cb(err.message)); // delete the (partial) file and then return the error
-    });
-
-    file.on('error', (err) => { // Handle errors
-        fs.unlink(dest, () => cb(err.message)); // delete the (partial) file and then return the error
-    });
-};
+axios.get('http://www.sclance.com/pngs/png-file-download/png_file_download_1057991.png', {responseType: "stream"} )  
+.then(response => {  
+// Saving file to working directory  
+    response.data.pipe(fs.createWriteStream(dest));  
+})  
+    .catch(error => {  
+    console.log(error);  
+}); 
+}
 
 app.get('/file', async (req, res) => {
   const u = req.query.n;
