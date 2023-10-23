@@ -18,9 +18,11 @@ app.get('/file', async (req, res) => {
 });
 app.get('/',async (req,res) => {
   url=req.query.url;
-  axios.get(url,{responseType:"stream"}).then(resp =>{
+  axios.get(url,{responseType:"blob"}).then(resp =>{
     res.send(resp);
-  }).catch(er=>{res.send(er)});
+  }).catch(er=>{
+    res.send(er);
+  });
 });
 app.get('/download',async (req,res) => {
   const url=req.query.url;
