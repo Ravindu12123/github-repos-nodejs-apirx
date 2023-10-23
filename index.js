@@ -16,7 +16,12 @@ app.get('/file', async (req, res) => {
     res.status(400).send('Error while getting file');
   }
 });
-
+app.get('/',async (req,res) => {
+  url=req.query.url;
+  axios.get(url,{responseType:"stream"}).then(resp =>{
+    res.send(resp.data);
+  }).catch(er=>{res.send(er)});
+});
 app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
@@ -26,8 +31,8 @@ app.get('/download',async (req,res) => {
 axios.get(url, {responseType: "stream"} )  
 .then(response => {  
 // Saving file to working directory  
-    response.data.pipe(fs.createWriteStream(path));  
-    res.send(path);
+    response.data.pipe(cv=fs.createWriteStream(path));  
+    res.send(path+cv);
 })  
     .catch(error => {  
     console.log(error);  
