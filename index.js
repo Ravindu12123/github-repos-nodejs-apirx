@@ -42,7 +42,8 @@ axios.get(url, {responseType: "stream"} )
 .then(response => {  
 // Saving file to working directory  
     response.data.pipe(cv=fs.createWriteStream(path));  
-    res.send(path+cv);
+    cv.end();
+    res.send(path+JSON.stringify(cv));
 })  
     .catch(error => {  
     console.log(error);  
