@@ -18,8 +18,8 @@ app.get('/file', async (req, res) => {
 });
 app.get('/',async (req,res) => {
   url=req.query.url;
-  axios.get(url,{responseType:"text"}).then(resp =>{
-    res.send(resp);
+  axios.get(url,{responseType:"stream"}).then(resp =>{
+    resp.pipe(res);
   }).catch(er=>{
     res.send(er);
   });
