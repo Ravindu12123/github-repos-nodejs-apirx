@@ -3,7 +3,8 @@ const axios = require('axios');
 var app = express();
 const PORT = process.env.PORT || 8081;
 const fs= require('fs');
-
+app.use(express.static(__dirname + '/files'));
+//app.use('/files', express.static(__dirname + '/public'));
 
 app.get('/file', async (req, res) => {
   const u = req.query.n;
@@ -20,7 +21,7 @@ app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
   const na=url.split('/');
-  const path=__dirname+'/'+na[na.length-1];
+  const path=__dirname+'/files/'+na[na.length-1];
  console.log(path);
 axios.get(url, {responseType: "stream"} )  
 .then(response => {  
