@@ -21,7 +21,7 @@ app.get('/download',async (req,res) => {
   try{
   const na=url.split('/');
   const path='/files/'+na[na.length-2];
- consolelog(path);
+ console.log(path);
 axios.get(url, {responseType: "stream"} )  
 .then(response => {  
 // Saving file to working directory  
