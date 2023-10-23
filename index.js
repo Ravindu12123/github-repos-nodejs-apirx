@@ -1,9 +1,6 @@
 const express = require('express');
 const axios = require('axios');
 var app = express();
-app.configure(function () {
-    this.use('/files', express.static('public')); // <-- This right here
-});
 const PORT = process.env.PORT || 8081;
 const fs= require('fs');
 
@@ -11,7 +8,7 @@ const fs= require('fs');
 app.get('/file', async (req, res) => {
   const u = req.query.n;
   try {
-    res.sendFile(__dirname + `/files/${u}`);
+    res.sendFile(__dirname + `/${u}`);
 
     //res.send(repos);
   } catch (error) {
@@ -23,7 +20,7 @@ app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
   const na=url.split('/');
-  const path=__dirname+'/files/'+na[na.length-1];
+  const path=__dirname+'/'+na[na.length-1];
  console.log(path);
 axios.get(url, {responseType: "stream"} )  
 .then(response => {  
