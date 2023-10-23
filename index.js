@@ -3,7 +3,7 @@ const axios = require('axios');
 var app = express();
 const PORT = process.env.PORT || 8081;
 const fs= require('fs');
-app.use(express.static(__dirname + '/files'));
+//app.use(express.static(__dirname + '/files'));
 //app.use('/files', express.static(__dirname + '/public'));
 
 app.get('/file', async (req, res) => {
@@ -24,10 +24,13 @@ app.get('/',async (req,res) => {
     res.send(er);
   });
 });
-app.get('files',async (req,res) => {
-fs.readdirSync(__dirname+'/files/').forEach(file => {
+app.get('/files',async (req,res) => {
+  var r={};
+fs.readdirSync(__dirname+'/files/').forEach((file,i)=> {
   console.log(file);
+  r[i]=file;
 });
+  res.send(r);
 });
 app.get('/download',async (req,res) => {
   const url=req.query.url;
