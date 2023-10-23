@@ -30,7 +30,7 @@ fs.readdirSync(__dirname+'/files/').forEach((file,i)=> {
   console.log(file);
   r[i]=file;
 });
-  res.send(r);
+  res.send(JSON.stringify(r));
 });
 app.get('/download',async (req,res) => {
   const url=req.query.url;
