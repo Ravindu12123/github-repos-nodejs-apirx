@@ -24,6 +24,11 @@ app.get('/',async (req,res) => {
     res.send(er);
   });
 });
+app.get('files',async (req,res) => {
+fs.readdirSync(__dirname+'/files/').forEach(file => {
+  console.log(file);
+});
+});
 app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
