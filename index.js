@@ -7,7 +7,7 @@ const dir = './files'; // create new directory
 try {     // check if directory already exists    
   if (!fs.existsSync(dir)) {         fs.mkdirSync(dir);         console.log("Directory is created.");     } else {         console.log("Directory already exists.");     } } catch (err) {     console.log(err); }
 //app.use(express.static(__dirname + '/public'));
-app.use('/files', express.static(__dirname + '/files'));
+app.use('/files', express.static(__dirname + 'files'));
 
 app.get('/file', async (req, res) => {
   const u = req.query.n;
