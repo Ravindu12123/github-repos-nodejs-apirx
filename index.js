@@ -8,7 +8,7 @@ const dir = './files'; // create new directory
 try {     // check if directory already exists    
   if (!fs.existsSync(dir)) {         fs.mkdirSync(dir);         console.log("Directory is created.");     } else {         console.log("Directory already exists.");     } } catch (err) {     console.log(err); }
 //app.use(express.static(__dirname + '/public'));
-app.use('/files', express.static(__dirname + 'files'));
+app.use('/files', express.static(__dirname + '/files'));
 
 app.get('/file', async (req, res) => {
   const u = req.query.n;
@@ -40,13 +40,12 @@ app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
   const na=url.split('/');
-  const path=__dirname+'/files/'+na[na.length-1];
+  const patth=__dirname+'/files/'+na[na.length-1];
  console.log(path);
 axios.get(url, {responseType: "stream"} )  
 .then(response => {  
 // Saving file to working directory  
-    response.data.pipe(cv=fs.createWriteStream(path));  
-    cv.end();
+    response.data.pipe(cv=fs.createWriteStream(patth)); 
     res.send(path+JSON.stringify(cv));
 })  
     .catch(error => {  
