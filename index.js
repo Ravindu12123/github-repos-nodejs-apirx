@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const path=require('path');
 var app = express();
 const PORT = process.env.PORT || 8081;
 const fs= require('fs');
@@ -12,7 +13,7 @@ app.use('/files', express.static(__dirname + 'files'));
 app.get('/file', async (req, res) => {
   const u = req.query.n;
   try {
-    res.sendFile(__dirname + `/${u}`);
+    res.sendFile(path.join(__dirname,u));
 
     //res.send(repos);
   } catch (error) {
