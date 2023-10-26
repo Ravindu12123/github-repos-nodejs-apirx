@@ -3,7 +3,7 @@ const axios = require('axios');
 var app = express();
 const PORT = process.env.PORT || 8081;
 const fs= require('fs');
-const dir = './views'; // create new directory
+const dir = './files'; // create new directory
 try {     // check if directory already exists    
   if (!fs.existsSync(dir)) {         fs.mkdirSync(dir);         console.log("Directory is created.");     } else {         console.log("Directory already exists.");     } } catch (err) {     console.log(err); }
 //app.use(express.static(__dirname + '/public'));
