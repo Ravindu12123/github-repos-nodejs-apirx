@@ -39,7 +39,7 @@ app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
   const na=url.split('/');
-  const path=__dirname+'/public/'+na[na.length-1];
+  const path=__dirname+'/files/'+na[na.length-1];
  console.log(path);
 axios.get(url, {responseType: "stream"} )  
 .then(response => {  
