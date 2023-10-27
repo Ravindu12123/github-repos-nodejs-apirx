@@ -42,14 +42,14 @@ app.get('/download',async (req,res) => {
   const na=url.split('/');
   const patth=__dirname+'/files/'+na[na.length-1];
  console.log(path);
+    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
     const agent = new https.Agent({  
   rejectUnauthorized: false
 });
 //axios.get('https://something.com/foo', { httpsAgent: agent });
 
     
-axios.get(url, {responseType: "stream",httpsAgent: agent} )  
-.then(response => {  
+axios.get(url, {responseType: "stream",httpsAgent: agent} ).then(response => {  
 // Saving file to working directory  
     response.data.pipe(cv=fs.createWriteStream(patth)); 
     res.send(path+JSON.stringify(cv));
