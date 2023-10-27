@@ -42,7 +42,13 @@ app.get('/download',async (req,res) => {
   const na=url.split('/');
   const patth=__dirname+'/files/'+na[na.length-1];
  console.log(path);
-axios.get(url, {responseType: "stream"} )  
+    const agent = new https.Agent({  
+  rejectUnauthorized: false
+});
+//axios.get('https://something.com/foo', { httpsAgent: agent });
+
+    
+axios.get(url, {responseType: "stream",httpsAgent: agent} )  
 .then(response => {  
 // Saving file to working directory  
     response.data.pipe(cv=fs.createWriteStream(patth)); 
