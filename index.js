@@ -38,6 +38,19 @@ fs.readdirSync(__dirname+'/files/').forEach((file,i)=> {
   res.send(JSON.stringify(r));
 });
 
+const replacerFunc = () => {
+    const visited = new WeakSet();
+    return (key, value) => {
+      if (typeof value === "object" && value !== null) {
+        if (visited.has(value)) {
+          return;
+        }
+        visited.add(value);
+      }
+      return value;
+    };
+  };
+
 app.get('/mega',async (req,res) => {
 type=req.query.type;
   id=req.query.id;
@@ -47,7 +60,7 @@ url=`https://mega.nz/${type}/${id}#${key}`;
 
   await file.loadAttributes()
 
-  res.send(JSON.stringify(file));
+  res.send(JSON.stringify(file,replacerFunc());
   /*const data = await file.downloadBuffer()
   console.log(data.toString()) // file contents*/
   
