@@ -39,8 +39,10 @@ fs.readdirSync(__dirname+'/files/').forEach((file,i)=> {
 });
 
 app.get('/mega',async (req,res) => {
-url=req.query.url;
-
+type=req.query.type;
+  id=req.query.id;
+  key=req.query.key;
+url=`https://mega.nz/${type}/${id}#${key}`;
   const file = File.fromURL(url)
 
   await file.loadAttributes()
