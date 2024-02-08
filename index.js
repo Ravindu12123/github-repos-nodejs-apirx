@@ -60,7 +60,7 @@ url=`https://mega.nz/${type}/${id}#${key}`;
 
   await file.loadAttributes()
 
-  res.send(JSON.stringify(file,replacerFunc());
+  res.send(JSON.stringify(file,replacerFunc()));
   /*const data = await file.downloadBuffer()
   console.log(data.toString()) // file contents*/
   
