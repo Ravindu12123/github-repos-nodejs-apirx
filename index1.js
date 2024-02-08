@@ -1,3 +1,4 @@
+const { File } = require('megajs');
 const express = require('express');
 const axios = require('axios');
 const path=require('path');
@@ -36,6 +37,21 @@ fs.readdirSync(__dirname+'/files/').forEach((file,i)=> {
 });
   res.send(JSON.stringify(r));
 });
+
+app.get('/mega',async (req,res) => {
+url=req.query.url;
+
+  const file = File.fromURL(url)
+
+  await file.loadAttributes()
+
+  res.send(JSON.stringify(file));
+  /*const data = await file.downloadBuffer()
+  console.log(data.toString()) // file contents*/
+  
+});
+
+  
 app.get('/download',async (req,res) => {
   const url=req.query.url;
   try{
