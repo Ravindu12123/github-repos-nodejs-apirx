@@ -65,7 +65,25 @@ url=`https://mega.nz/${type}/${id}#${key}`;
   console.log(data.toString()) // file contents*/
   
 });
+app.get('/megad',async (req,res) => {
+  type=req.query.type;
+  id=req.query.id;
+  key=req.query.key;
+  f=req.query.f;
+url=`https://mega.nz/${type}/${id}#${key}/file/${f}`;
+  const folder = File.fromURL(url)
+// Load folder attributes
+folder.loadAttributes((error, file) => {
+  if (error) return console.error(error)
 
+  // Will download a file specified by /file/example in the URL
+  file.download((error, data) => {
+    if (error) return console.error(error)
+    console.log(data)
+  })
+  res.send(file.name);
+})
+});
   
 app.get('/download',async (req,res) => {
   const url=req.query.url;
