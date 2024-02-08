@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
-    "whatsapp-web.js":"1.23.0"
+    "whatsapp-web.js":"1.23.0",
+    "megajs":"1.1.4"
   }
 }
