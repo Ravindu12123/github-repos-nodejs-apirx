@@ -1,4 +1,5 @@
 const { File } = require('megajs');
+const m3u8tomp4 = require('@zackdk/m3u8tomp4');
 const express = require('express');
 const axios = require('axios');
 const path=require('path');
@@ -20,6 +21,12 @@ app.get('/file', async (req, res) => {
   } catch (error) {
     res.status(400).send('Error while getting file');
   }
+});
+app.get('/m3',async (req,res)=>{
+   m3u8Url=req.query.url;
+  n=req.query.n;
+var data = await m3u8tomp4.default(m3u8Url);
+fs.promises.writeFile(n, data).then(e=> res.send("done"));
 });
 app.get('/',async (req,res) => {
   url=req.query.url;
